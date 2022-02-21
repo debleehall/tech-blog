@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     Post.findAll({
       attributes: [
         'id',
-        'post_text',
+        'post_content',
         'user_id',
         'created_at'
       ],
@@ -27,16 +27,19 @@ router.get('/', (req, res) => {
         }
       ]
     })
-      .then(dbPostData => {
-        const posts = dbPostData.map(post => post.get({ plain: true }));
-        res.render('homepage', { posts });
+    .then(dbPostData => {
+      const posts = dbPostData.map(post => post.get({ plain: true }));
 
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
+      res.render('homepage', {
+        posts,
+        loggedIn: req.session.loggedIn
       });
-  });   
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});   
 
   router.get('/login', (req, res) => {
     res.render('login');
