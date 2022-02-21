@@ -11,13 +11,6 @@ Post.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    post_text: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        len: [1],
-      },
-    },
     title: {
         type: DataTypes.STRING,
         allowNull: false
